@@ -7,7 +7,8 @@
     "build": "GENERATE_SOURCEMAP=false NODE_ENV=production craco build",
     "serve": "cross-env NODE_ENV=development runtime-env-cra --env-file=./env/.env --config-name=./build/runtime-env.js && serve -s build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "msw": "msw init public --save"
   },
   "eslintConfig": {
     "extends": [
@@ -46,7 +47,11 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
+    "msw": "^2.0.10",
     "runtime-env-cra": "^0.2.4",
     "serve": "^14.2.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

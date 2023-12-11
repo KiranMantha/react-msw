@@ -1,26 +1,28 @@
-import { env } from "@env";
+import { useEffect, useState } from "react";
 import "./App.css";
-import logo from "./logo.svg";
 
 function App() {
+  const [users, setUsers] = useState<Array<{ name: string }>>([]);
+  useEffect(() => {
+    fetch("/api/users")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setUsers(data.users);
+        console.log(data);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.{" "}
-          {env.REACT_APP_SAMPLE_VARIABLE}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>users from msw mock api response</div>
+      <ul>
+        {users.map((user) => (
+          <li>{user.name}</li>
+        ))}
+      </ul>
+    </>
   );
 }
 
